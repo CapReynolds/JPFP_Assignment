@@ -1,12 +1,12 @@
-import axios from 'axios'
+/*import axios from 'axios'
 
 //action type
-const SET_CAMPUSES = 'SET_CAMPUSES'
+const LOAD_CAMPUSES = 'LOAD_CAMPUSES'
 
 //action creator
 export const setCampuses = (campuses) => {
   return {
-    type: SET_CAMPUSES,
+    type: LOAD_CAMPUSES,
     campuses
   }
 }
@@ -26,9 +26,10 @@ const initialState = []
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case SET_CAMPUSES:
+    case LOAD_CAMPUSES:
       return action.campuses
     default:
       return state
   }
 }
+*/

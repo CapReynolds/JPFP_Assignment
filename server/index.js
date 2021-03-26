@@ -30,6 +30,7 @@ const routes = require('./routes');
 // Body parsing middleware
 ///Users/avernon/Fullstack/Assignments/jpfp/server/public/index.html
 app.use(express.static(path.join(__dirname, 'public')))
+app.use('/assets', express.static(path.join(__dirname + '/assets')));
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/public', 'index.html'))
   })
