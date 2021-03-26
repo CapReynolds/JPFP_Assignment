@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import store from '../store/store';
-//import img_ from '../../assets/placeholder_img.jpeg';
 ///Users/avernon/Fullstack/Assignments/jpfp/assets/placeholder_img.jpeg
 class Campuses extends Component {
     constructor(){

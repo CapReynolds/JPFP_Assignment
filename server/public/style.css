@@ -23,7 +23,10 @@ body {
 .campus_info_b {
     flex: 1;
 }
-
+img {
+    height: 120px;
+    width: 120px;
+}
 #campus_info {
     background: salmon;
     flex: 0 0 33.3333%;

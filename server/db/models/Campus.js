@@ -20,7 +20,7 @@ const Campus = db.define('campus', {
     imageURL: {
         type: Sequelize.STRING(255),
         allowNull: false,
-        defaultValue: 'https://tmp.jpg'
+        defaultValue: 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'
     },
     description: {
         type: Sequelize.TEXT,
