@@ -1,12 +1,17 @@
 import React from "react";
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 
-const NavBar = () => {
-   
+const NavBar = ({location: {pathname}}) => {
+    //console.log(props);
         return  (
             <nav>
-                <a href=''>HOME</a>
-                <a href=''>STUDENTS</a>
-                <a href=''>CAMPUSES</a>
+                <div id='home'>
+                    <Link to = '/' className={pathname === '/' ? 'selected': ''}>Home</Link>
+                </div>
+                <div id='dir'>
+                    <Link to = '/students' className={pathname === '/students' ? 'selected': ''}>Students</Link>
+                    <Link to = '/campuses' className={pathname === '/campuses' ? 'selected': ''}>Campuses</Link>
+                </div>
             </nav>
         )
 }

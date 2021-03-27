@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import store from '../store/store';
-///Users/avernon/Fullstack/Assignments/jpfp/assets/placeholder_img.jpeg
+import {Link} from 'react-router-dom';
+
 class Campuses extends Component {
     constructor(){
         super();
@@ -23,10 +24,9 @@ class Campuses extends Component {
     //Assignments/jpfp/assets/placeholder_img.jpeg
     render(){
         const {campuses} = this.state;
-        //console.dir(campuses);
-        //console.log('in render '+campuses);
+        //console.log(campuses);
         return  (
-            <div id = 'all_campuses'>
+            <div id = 'all_items'>
                 {
                     campuses.map(campus =>{
                         return (
@@ -36,11 +36,13 @@ class Campuses extends Component {
                                         <img src={campus.imageURL}/>
                                     </div>
                                     <div className='campus_info_b'>
-                                        <h5>{campus.name}</h5>
+                                        <Link to={`/campuses/${campus.id}`}>
+                                            <h5>{campus.name}</h5>
+                                        </Link>
                                         <p>other stuff</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                           
                         );
                     })
                 }

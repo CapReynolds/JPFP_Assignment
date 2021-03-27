@@ -2,21 +2,47 @@ import React, {Component} from "react"
 import store from '../store/store';
 
 class Students extends Component {
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
+        this.state = {
+            students: store.getState().students
+        }
+    }
 
-        const initialState = store.getState();
-
-        this.state = initialState;
+    componentWillUnmount(){
+        this.unsubscribe();
     }
 
     componentDidMount(){
-        const {students} = this.state;
+        this.unsubscribe = store.subscribe(()=>{
+            this.setState({
+                students: store.getState().students
+            });
+        })
     }
     render(){
+        const {students} = this.state;
+        //console.log(students);
         return  (
-            <div>
-                <h1>In Students Component</h1>
+            <div id = 'all_items'>
+                {
+                    students.map(student =>{
+                        return (
+                            <div id='campus_info'>
+                                <div id='campus_container'>
+                                    <div className='campus_info_a'>
+                                        <img src={student.imageURL}/>
+                                    </div>
+                                    <div className='campus_info_b'>
+                                        <h5>{student.firstName + ' ' + student.lastName  }</h5>
+                                        <p>Campus Name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
+                <h1>In Student Component</h1>
             </div>
         )
     }

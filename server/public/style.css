@@ -2,14 +2,24 @@ body {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: rgb(255, 255, 255);
   }
-  nav {
-      display: flex;
-      justify-content:flex-end;
+  nav{
+    background-color: rgb(184, 184, 184);
+    display: flex;
+    justify-content:space-between;
+    align-items: flex-end;
+    height: 25px;
   }
-  a{
+  #home {
+}
+  #dir {
+  }
+  #dir > a{
       margin-left: 30px;
   }
-#all_campuses {
+  nav a.selected{
+    font-weight: bold;
+}
+#all_items {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
