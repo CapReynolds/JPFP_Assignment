@@ -38,71 +38,70 @@ app.get('/', (req, res, next) => {
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+app.get('/api/campuses', routes);
+app.get('/api/students', routes);
+
 const syncAndSeed = async() => {
     try{
-    await db.sync({force:true});
-    let campusArr = [];
-    let studentArr = [];
+        await db.sync({force:true});
+        let campusArr = [];
+        let studentArr = [];
 
-    let fakeCampusName;
-    let fakeCampusAddress;
-    let fakeCampusDescription;
+        let fakeCampusName;
+        let fakeCampusAddress;
+        let fakeCampusDescription;
 
-    let fakeStudentFirstName;
-    let fakeStudentLastName;
-    let fakeStudentEmail;
-    let fakeStudentGPA;
+        let fakeStudentFirstName;
+        let fakeStudentLastName;
+        let fakeStudentEmail;
+        let fakeStudentGPA;
 
-    for(let i = 0; i <10; i++)
-    {
-        fakeCampusName = faker.company.companyName()+ ' University';
-        fakeCampusAddress = faker.address.streetAddress();
-        fakeCampusDescription = faker.lorem.paragraph();
+        for(let i = 0; i <10; i++)
+        {
+            fakeCampusName = faker.company.companyName()+ ' University';
+            fakeCampusAddress = faker.address.streetAddress() + ' \n ' + faker.address.city() + ', ' + faker.address.state() + ' ' + faker.address.zipCode();
+            fakeCampusDescription = faker.lorem.paragraph();
 
-        fakeStudentFirstName = faker.name.firstName();
-        fakeStudentLastName = faker.name.lastName();
-        fakeStudentEmail = faker.internet.email();
-        fakeStudentGPA = Math.random() * (1.5) + 2.5;
+            fakeStudentFirstName = faker.name.firstName();
+            fakeStudentLastName = faker.name.lastName();
+            fakeStudentEmail = faker.internet.email();
+            fakeStudentGPA = Math.random() * (1.5) + 2.5;
 
-        campusArr.push(
+            campusArr.push(
             {
                 name: fakeCampusName,
                 location: fakeCampusAddress,
                 description: fakeCampusDescription,
-            }
-        );
-        studentArr.push(
+            });
+
+            studentArr.push(
             {
                 firstName: fakeStudentFirstName,
                 lastName: fakeStudentLastName,
                 email: fakeStudentEmail,
                 GPA: fakeStudentGPA,
                 campusId: (Math.floor(Math.random() * 9) + 1)
-            }
-        );
-    
-    }
-    const cmpus = await Promise.all(
-        campusArr.map(campus => {[
-            Campus.create(campus),
-        ]})
-    );
+            });
+        
+        }
 
-    const stdnt = await Promise.all(
-        studentArr.map(student => {[
-            Student.create(student),
-        ]})
-    );
+        await Promise.all(
+            campusArr.map(campus => {[
+                Campus.create(campus),
+            ]})
+        );
+            
+        await Promise.all(
+            studentArr.map(student => {[
+                Student.create(student),
+            ]})
+        );
+        
     }
-    catch(ex)
-    {
-        console.log(ex);
+    catch(err){
+        console.log(err);
     }
 }
-
-app.get('/api/campuses', routes);
-app.get('/api/students', routes);
-
 
 const init = async() => {
     try {
@@ -120,3 +119,6 @@ const init = async() => {
 };
 
 init();
+
+
+

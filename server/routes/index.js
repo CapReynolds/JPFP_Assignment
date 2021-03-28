@@ -6,8 +6,12 @@ const {Campus, Student} = require('../db')
 
 router.get('/api/campuses', async (req, res, next) => {
   try {
-    const campuses = await Campus.findAll()
+    const campuses = await Campus.findAll({
+      include: [Student],
+      Student
+    });
     res.send(campuses);
+  
   }
   catch (error) {
     next(error)
@@ -16,7 +20,10 @@ router.get('/api/campuses', async (req, res, next) => {
 
 router.get('/api/students', async (req, res, next) => {
   try {
-    const students = await Student.findAll()
+    const students = await Student.findAll({
+      include: [Campus],
+    })
+    
     res.json(students);
   }
   catch (error) {

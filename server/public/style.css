@@ -43,7 +43,64 @@ img {
     flex-direction: row;
     margin: 10px;
 }
+#campus_info_single {
+    background: salmon;
+    width: 80%;
+    flex-direction: row;
+    margin: 10px;
+}
+#campus_info2 {
+    background: salmon;
+    flex: 0 0 80%;
+    flex-direction: row;
+    margin: 10px;
+}
+.campus_info_a_single {
+    flex: 1;
+}
+.campus_info_b_single {
+    flex: 1;
+}
+.campus_info_a_single > img {
+    height: 300px;
+    width: 400px;
+}
 #campus_container {
     display: flex;
     flex-direction: row;
+}
+#campus_container2 {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+}
+#address_info{
+    flex: 1;
+}
+#buttons_div{
+    justify-content: flex-end;
+}
+#student-list{
+    display:flex;
+    flex-direction: column;
+}
+#student-item {
+    border: 2px solid #7e77774f;
+    padding: 2px;
+}
+#student_b {
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    background-color: rgb(103, 172, 57);
+}
+
+#student_b > #button_div {
+    display: flex;
+    align-items:flex-end;
+}
+
+#student-info {
+    display: flex;
+    background-color: rgb(57, 103, 172);
 }
