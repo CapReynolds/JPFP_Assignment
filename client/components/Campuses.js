@@ -8,6 +8,7 @@ class Campuses extends Component {
         this.state = {
             campuses: store.getState().campuses
         };
+        //console.log(store.getState());
     }
 
     componentWillUnmount(){
@@ -26,27 +27,38 @@ class Campuses extends Component {
         const {campuses} = this.state;
         //console.log(campuses);
         return  (
-            <div id = 'all_items'>
-                {
-                    campuses.map(campus =>{
-                        return (
-                            <div id='campus_info'>
-                                <div id='campus_container'>
-                                    <div className='campus_info_a'>
-                                        <img src={campus.imageURL}/>
+            <div>
+                <div id='page_title'>
+                    <h1>All Campuses</h1>
+                    <div id='button_div'>
+                        <button>Add Campus</button>
+                    </div>
+                </div>
+                <div id = 'all_items'>
+                    {
+                        campuses.map(campus =>{
+                            return (
+                                <div id='campus_info'>
+                                    <div id='campus_container'>
+                                        <div className='campus_info_a'>
+                                            <img src={campus.imageURL}/>
+                                        </div>
+                                        <div className='campus_info_b'>
+                                            <Link to={`/campuses/${campus.id}`}>
+                                                <h5>{campus.name}</h5>
+                                            </Link>
+                                            <p>({campus.students.length}) students</p>
+                                            <div id='button_div'>
+                                                <button>edit</button>
+                                                <button>delete</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className='campus_info_b'>
-                                        <Link to={`/campuses/${campus.id}`}>
-                                            <h5>{campus.name}</h5>
-                                        </Link>
-                                        <p>other stuff</p>
-                                    </div>
-                                </div>
-                            </div>                           
-                        );
-                    })
-                }
-                <h1>In Campus Component</h1>
+                                </div>                           
+                            );
+                        })
+                    }
+                </div>
             </div>
         )
     }

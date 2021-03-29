@@ -1,3 +1,4 @@
+/*
 const router = require("express").Router()
 
 router.get('/students', async (req, res, next) => {
@@ -11,3 +12,4 @@ router.get('/students', async (req, res, next) => {
   })
 
   module.exports = router;
+  */

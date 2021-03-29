@@ -13,7 +13,7 @@ class SingleCampus extends Component {
         const campusID = campusArr.findIndex((cmps) => cmps.id === parseInt(id));
 
         const campus = campusArr[campusID];
-        console.log(campus);
+        //console.log(campus);
 
         this.state = {
             campus: campus 
@@ -29,6 +29,7 @@ class SingleCampus extends Component {
     }
 
     componentDidMount(){
+        
         this.unsubscribe = store.subscribe(()=>{
             this.setState({
                 campuses: store.getState().campuses
@@ -37,7 +38,7 @@ class SingleCampus extends Component {
     }
     render(){
         const {campus} = this.state;
-        console.dir(campus);
+        console.log(campus);
         return  (
             <div>
                 <div id = 'all_items'>

@@ -40,6 +40,8 @@ app.use(express.urlencoded({extended: true}))
 
 app.get('/api/campuses', routes);
 app.get('/api/students', routes);
+app.get('/api/campuses/:id', routes);
+app.get('/api/students/:id', routes);
 
 const syncAndSeed = async() => {
     try{

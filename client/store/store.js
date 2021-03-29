@@ -11,6 +11,7 @@ const LOAD_STUDENTS = 'LOAD_STUDENTS'; //action type
 const LOAD_CAMPUSES = 'LOAD_CAMPUSES'; //action type
 const STUDENTS_LOADED = 'STUDENTS_LOADED'; //action type
 const CAMPUSES_LOADED = 'CAMPUSES_LOADED'; //action type
+const INSERT_STUDENT = 'INSERT_STUDENT'; //action type
 /*
 const setStudents = (students) => ({ //action creators
     type: SET_STUDENTS,
@@ -47,6 +48,12 @@ const reducer = (state = initialState, action) =>{
         state = {
             ...state,
             campusLoading: false
+        };
+    }
+    else if (action.type === INSERT_STUDENT) {
+        state = {
+            ...state,
+            students: state.students.concat([action.student])
         };
     }
     return state;
