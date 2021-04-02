@@ -1,8 +1,8 @@
 import React from "react";
+import {connect} from 'react-redux';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
 
 const NavBar = ({location: {pathname}}) => {
-    //console.log(props);
         return  (
             <nav>
                 <div id='home'>
@@ -16,4 +16,8 @@ const NavBar = ({location: {pathname}}) => {
         )
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps)(NavBar);

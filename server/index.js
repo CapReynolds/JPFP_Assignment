@@ -29,19 +29,23 @@ const routes = require('./routes');
 
 // Body parsing middleware
 ///Users/avernon/Fullstack/Assignments/jpfp/server/public/index.html
+app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/assets', express.static(path.join(__dirname + '/assets')));
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/public', 'index.html'))
   })
-//app.get('/api/campuses')
-app.use(express.json())
+
 app.use(express.urlencoded({extended: true}))
 
 app.get('/api/campuses', routes);
 app.get('/api/students', routes);
 app.get('/api/campuses/:id', routes);
 app.get('/api/students/:id', routes);
+
+
+app.post('/api/campuses', routes);
+app.post('/api/students', routes);
 
 const syncAndSeed = async() => {
     try{
@@ -72,7 +76,7 @@ const syncAndSeed = async() => {
             campusArr.push(
             {
                 name: fakeCampusName,
-                location: fakeCampusAddress,
+                address: fakeCampusAddress,
                 description: fakeCampusDescription,
             });
 

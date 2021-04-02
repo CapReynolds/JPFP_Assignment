@@ -1,61 +1,39 @@
 import React, {Component} from "react"
-import store from '../store/store';
+import {connect} from 'react-redux';
+import {getCampus} from '../store/singleCampus';
+//import store from '../store/store';
 
 class SingleCampus extends Component {
-    constructor(props){
-        super(props);
-        
-        //console.log(props);
-        const {match: {params: {id}}} = props; //pull the campus id from props
-
-        const campusArr = store.getState().campuses;
-        //console.log(campusArr);
-        const campusID = campusArr.findIndex((cmps) => cmps.id === parseInt(id));
-
-        const campus = campusArr[campusID];
-        //console.log(campus);
-
-        this.state = {
-            campus: campus 
-            ? {
-                ...campus, 
-                campusID,
-            } : null
-        };
-    }
-
-    componentWillUnmount(){
-        this.unsubscribe();
-    }
-
     componentDidMount(){
-        
-        this.unsubscribe = store.subscribe(()=>{
-            this.setState({
-                campuses: store.getState().campuses
-            });
-        })
+        try{
+            this.props.loadCampus(this.props.match.params.id);
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
     }
+
     render(){
-        const {campus} = this.state;
-        console.log(campus);
-        return  (
+        const {singleCampus} = this.props;
+       
+        return  singleCampus != undefined ? (
             <div>
                 <div id = 'all_items'>
                     {
                         <div id='campus_info_single'>
                             <div id='campus_container'>
                                 <div className='campus_info_a_single'>
-                                    <img id='single_img' src={campus.imageURL}/>
+                                    <img id='single_img' src={singleCampus.imageURL}/>
                                 </div>
                                 <div className='campus_info_b_single'>
-                                    <h2>{campus.name}</h2>
-                                    <p>{campus.description}</p>
+                                    <h2>{singleCampus.name}</h2>
+                                    <p>{singleCampus.description}</p>
                                 </div>
                             </div>
                             <div id='campus_container2'>
                                 <div id='address_info'>
-                                    <small>{campus.location}</small>
+                                    <small>{singleCampus.address}</small>
                                 </div>
                                 <div id='buttons_div'>
                                     <button>edit</button>
@@ -69,8 +47,8 @@ class SingleCampus extends Component {
                     <h1>Students on Campus</h1>
                     <div id='student-list'>
                     {
-                        campus.students.length != 0 ? 
-                        campus.students.map(student =>{
+                        singleCampus.students != undefined ? 
+                        singleCampus.students.map(student =>{
                             return (
                                 <div id = 'student-item' key={student.id}>         
                                     <div id ='student-info'>
@@ -87,8 +65,20 @@ class SingleCampus extends Component {
                     </div>
                 </div>
             </div>
-        )
+        ) : <div><h1>nothing here</h1></div> 
+       /* return (<div><h1>hey</h1></div>) */
     }
 }
 
-export default SingleCampus
+const mapStateToProps = (state)=> {
+    //console.log(state, ' single campus state');
+    return state
+    
+}
+
+const mapDispatchToProps = (dispatch)=> {
+    return{
+        loadCampus: (id)=> dispatch(getCampus(id)),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCampus)
