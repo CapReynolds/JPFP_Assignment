@@ -43,9 +43,11 @@ app.get('/api/students', routes);
 app.get('/api/campuses/:id', routes);
 app.get('/api/students/:id', routes);
 
-
 app.post('/api/campuses', routes);
 app.post('/api/students', routes);
+
+app.delete('/api/campuses/:id', routes);
+app.delete('/api/students/:id', routes);
 
 const syncAndSeed = async() => {
     try{

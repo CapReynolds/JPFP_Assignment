@@ -97,4 +97,40 @@ router.post('/api/students', async (req, res, next) => {
   }
 })
 
+router.delete('/api/campuses/:id', async (req, res, next) => {
+  try {
+    console.log('in the delete campus');
+    const campus = await Campus.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [Student]
+    });
+    var destroyed = await campus.destroy();
+    res.send(destroyed);
+    
+    //res.json(students);
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/api/students/:id', async (req, res, next) => {
+  try {
+    const student = await Student.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [Campus]
+    });
+    var destroyed = await student.destroy();
+    res.send(destroyed);
+    
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router

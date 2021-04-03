@@ -3,9 +3,10 @@ import React, {Component} from "react"
 import store from '../store/index';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
+import {DeleteAStudent} from '../store/students';
 
 const Students = (props) => {
-    const {students} = props;
+    const {students, DeleteStudent} = props;
     //console.log(students);
     return  (
         <div>
@@ -37,6 +38,10 @@ const Students = (props) => {
                                             </Link>
                                             : <br></br>
                                         }
+                                        <div id='button_div'>
+                                            <button>edit</button>
+                                            <button onClick={()=> DeleteStudent(student.id)}>delete</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -53,4 +58,13 @@ const mapStateToProps = (state)=> {
         students: state.students
     }
 }
-export default connect(mapStateToProps)(Students)
+
+const MapDispatchToProps = (dispatch) =>{
+    return {
+        DeleteStudent: (id)=> {
+            dispatch(DeleteAStudent(id));
+        }
+    }
+}
+
+export default connect(mapStateToProps,MapDispatchToProps)(Students)
