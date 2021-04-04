@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {getCampus} from '../store/singleCampus';
-//import store from '../store/store';
 
 class SingleCampus extends Component {
     componentDidMount(){
@@ -17,7 +17,7 @@ class SingleCampus extends Component {
     render(){
         const {singleCampus} = this.props;
        
-        return  singleCampus != undefined ? (
+        return (
             <div>
                 <div id = 'all_items'>
                     {
@@ -36,8 +36,10 @@ class SingleCampus extends Component {
                                     <small>{singleCampus.address}</small>
                                 </div>
                                 <div id='buttons_div'>
-                                    <button>edit</button>
-                                    <button>delete</button>
+                                    <Link to={`/campuses/edit/${singleCampus.id}`}>
+                                        <button>edit</button>
+                                    </Link>
+                                    <button id='delete'>delete</button>
                                 </div>
                             </div>
                         </div>                     
@@ -45,9 +47,10 @@ class SingleCampus extends Component {
                 </div>
                 <div>
                     <h1>Students on Campus</h1>
+                    {Array.isArray(singleCampus.students) && singleCampus.students.length != 0 ? 
                     <div id='student-list'>
                     {
-                        singleCampus.students != undefined ? 
+                        singleCampus.students != null ? 
                         singleCampus.students.map(student =>{
                             return (
                                 <div id = 'student-item' key={student.id}>         
@@ -55,23 +58,23 @@ class SingleCampus extends Component {
                                         <div id='student_a'><img src={student.imageURL}/></div>  
                                         <div id='student_b'>
                                             <div id= 'title'><h4>{student.firstName + ' ' + student.lastName}</h4></div>
-                                            <div id='button_div'><button>delete</button></div>
                                         </div>
                                     </div>
                                 </div>
                             );
-                        }) : <p>There are no students</p>
+                        }) 
+                        : <div><p>There are no students</p></div>
                     }
                     </div>
+                    : <div><p>There are no students</p></div>
+                }
                 </div>
             </div>
-        ) : <div><h1>nothing here</h1></div> 
-       /* return (<div><h1>hey</h1></div>) */
+        ) 
     }
 }
 
 const mapStateToProps = (state)=> {
-    //console.log(state, ' single campus state');
     return state
     
 }

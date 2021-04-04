@@ -74,7 +74,6 @@ router.post('/api/campuses', async (req, res, next) => {
      address
     }));
     
-    //res.json(students);
   }
   catch (error) {
     next(error)
@@ -99,7 +98,6 @@ router.post('/api/students', async (req, res, next) => {
 
 router.delete('/api/campuses/:id', async (req, res, next) => {
   try {
-    console.log('in the delete campus');
     const campus = await Campus.findOne({
       where: {
         id: req.params.id
@@ -109,7 +107,6 @@ router.delete('/api/campuses/:id', async (req, res, next) => {
     var destroyed = await campus.destroy();
     res.send(destroyed);
     
-    //res.json(students);
   }
   catch (error) {
     next(error)
@@ -132,5 +129,107 @@ router.delete('/api/students/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/api/campuses/edit/', async (req, res, next) => {
+  try {
+    
+    if(req.body.studentID != undefined)
+    {
+      const {studentID} = req.body;
+      const updated = await Campus.update({
+        students: students.filter(student=> student.id !== studentID)
+      },{
+        where: {
+          id: req.body.id
+        },
+        include: [Student]
+      });
+  
+      const campus = await Campus.findOne({
+        where: {
+          id: req.body.id
+        },
+        include: [Student]
+      });
+      res.send(campus); 
+      
+    }
+    else {
+      const updated = await Campus.update({
+        name: req.body.name,
+        address: req.body.address,
+        students: req.body.students
+      },{
+        where: {
+          id: req.body.id
+        },
+        include: [Student]
+      });
+
+      const campus = await Campus.findOne({
+        where: {
+          id: req.body.id
+        },
+        include: [Student]
+      });
+      res.send(campus); 
+    }
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+router.post('/api/students/edit/', async (req, res, next) => {
+  try {
+    if(req.body.studentID != undefined)
+    {
+      
+      const updated = await Student.update({
+        campusId: null
+      },{
+        where: {
+          id: req.body.studentID
+        },
+        include: [Campus]
+      });
+  
+      const student = await Student.findOne({
+        where: {
+          id: req.body.studentID
+        },
+        include: [Campus]
+      });
+      res.send(student); 
+      
+    }
+    else{
+      const updated = await Student.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        GPA: req.body.GPA,
+      },{
+        where: {
+          id: req.body.id
+        },
+        include: [Student]
+      });
+
+      const student = await Student.findOne({
+        where: {
+          id: req.body.id
+        },
+        include: [Campus]
+      });
+      
+      res.send(student);
+    }
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
 
 module.exports = router

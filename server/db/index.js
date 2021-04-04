@@ -8,8 +8,8 @@ const db = require('./db');
 const Campus = require('./models/Campus');
 const Student = require('./models/Student');
 
-Campus.hasMany(Student, {constraints: false});
-Student.belongsTo(Campus, {constraints: false});
+Campus.hasMany(Student);
+Student.belongsTo(Campus);
 //Student.hasOne(Campus, {constraints: false});
 
 module.exports = {

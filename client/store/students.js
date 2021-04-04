@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const LOAD_STUDENTS = 'LOAD_STUDENTS'; //action type
-const CREATE_STUDENT = 'CREATE_STUDENT'; //action type
-const DELETE_STUDENT = 'DELETE_STUDENT'; //action type
+const LOAD_STUDENTS = 'LOAD_STUDENTS'; 
+const CREATE_STUDENT = 'CREATE_STUDENT'; 
+const DELETE_STUDENT = 'DELETE_STUDENT'; 
+const EDIT_STUDENT = 'EDIT_STUDENT';
 
 const initialState = [];
 
@@ -24,6 +25,13 @@ export const loadStudents = (students) => {
     return {
       type: DELETE_STUDENT,
       studentID
+    }
+  }
+
+  export const editStudent = (student) => {
+    return {
+      type: EDIT_STUDENT,
+      student
     }
   }
 
@@ -61,10 +69,46 @@ export const loadStudents = (students) => {
   export const DeleteAStudent = (studentID) =>{
     return async(dispatch) => {
       try{
-          //const student = (await axios.get(`/api/students/${studentID}`)).data;
-          //console.log(student);
           dispatch(deleteStudent(studentID));
           const removedstudent = (await axios.delete(`/api/students/${studentID}`)).data;
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+    }
+  }
+
+  export const EditAStudent = (firstName, lastName, email, GPA, studentID) =>{
+    return async(dispatch) => {
+      try{
+        const studentInfo = {
+          id: studentID,
+          firstName,
+          lastName,
+          email,
+          GPA
+        }
+        const student = (await axios.post(`/api/students/edit/`, studentInfo)).data;
+        dispatch(editStudent(student));
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+    }
+  }
+
+  export const UnregisterAStudent = (student, campus) =>{
+    return async(dispatch) => {
+      try{
+        console.log('in the unregister student edit');
+        const studentInfo = {
+          campusID: campus.id,
+          studentID: student.id
+        }
+          const editedStudent = (await axios.post(`/api/students/edit/`, studentInfo)).data;
+          dispatch(editStudent(editedStudent));
       }
       catch(err)
       {
@@ -83,5 +127,10 @@ export const loadStudents = (students) => {
     if (action.type === DELETE_STUDENT) {
       state = [...state.filter(student => student.id != action.studentID)]  
     }
+    if (action.type === EDIT_STUDENT) { 
+      state = state.map(student=> student.id === action.student.id ? action.student : student)
+    }
     return state;
   }
+
+

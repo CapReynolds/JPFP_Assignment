@@ -2,10 +2,8 @@ import axios from 'axios';
 
 const initialState = {};
 
-//action type
 export const SET_STUDENT = 'SET_STUDENT';
 
-//action creator
 export const setStudent = (student) => {
   return {
     type: SET_STUDENT,

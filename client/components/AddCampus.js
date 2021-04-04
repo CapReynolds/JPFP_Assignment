@@ -25,26 +25,22 @@ class AddCampus extends Component {
    render(){
        const {onInputChange, Create} = this;
        const {name, address} = this.state;
-    return  (
-        <div id='form'>
-                <br>
-                </br>
-                <label>
-                Campus Name:
+        return  (
+            <div id='form'>
+                <div id='form_row'>
+                    <label>Campus Name:</label>
+                    <input type='text' name= 'name' value={name} onChange={onInputChange}/>
+                </div>
+                <div id='form_row'>
+                    <label>Campus Address:</label>
+                    <input type='text' name= 'address' value={address} onChange={onInputChange} />
+                </div>
                 
-                <input type='text' name= 'name' value={name} onChange={onInputChange}/>
-                </label>
-                
-                <label>
-                Campus Address:
-                
-                <input type='text' name= 'address' value={address} onChange={onInputChange} />
-                </label>
-                
-               
-                <button onClick={() => Create(name, address)}>Add A Campus</button>
-        </div>
-    );
+                <div id='form_row'>
+                    <button onClick={() => Create(name, address)}>Add A Campus</button>
+                </div>
+            </div>
+        );
     }
 }
 

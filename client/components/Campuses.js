@@ -5,8 +5,7 @@ import {DeleteACampus} from '../store/campuses';
 
 const Campuses = (props) => {
     const {campuses, DeleteCampus} = props;
-    console.log(props);
-    //const {DeleteCampus} = this.props;
+    
     return  (
         <div>
             <div id='page_title'>
@@ -19,7 +18,7 @@ const Campuses = (props) => {
             </div>
             <div id = 'all_items'>
                 {
-                    campuses != undefined ?
+                    campuses != undefined && campuses.length != 0 ?
                     campuses.map(campus =>{
                         return (
                             <div id='campus_info'>
@@ -31,16 +30,15 @@ const Campuses = (props) => {
                                         <Link to={`/campuses/${campus.id}`}>
                                             <h5>{campus.name}</h5>
                                         </Link>
-                                        <p>({campus.student != null ? campus.students.length : '0'}) students</p>
-                                        <div id='button_div'>
-                                            <button>edit</button>
-                                            <button onClick={()=> DeleteCampus(campus.id)}>delete</button>
+                                        <p>({campus.students != null ? campus.students.length : '0'}) students</p>
+                                        <div id='buttons_div'>
+                                            <button id='delete' onClick={()=> DeleteCampus(campus.id)}>delete</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>                           
                         );
-                    }) : <div><h1>No Campuses</h1></div>
+                    }) : <div><h2>There are no campuses</h2></div>
                 } 
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import {getStudent} from '../store/singleStudent';
-//import store from '../store/store';
+import {Link} from 'react-router-dom';
 
 
 class SingleStudent extends Component {
@@ -31,9 +31,11 @@ class SingleStudent extends Component {
                             <div className='student_info_b_single'>
                                 <h2>{singleStudent.firstName + ' ' + singleStudent.lastName}</h2>
                                 <p>GPA: {singleStudent.GPA}</p>
-                                <div id='buttons_div'>
+                                <div className='buttons_div2'>
+                                <Link to={`/students/edit/${singleStudent.id}`}>
                                     <button>edit</button>
-                                    <button>delete</button>
+                                </Link>
+                                    <button id='delete'>delete</button>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +51,6 @@ class SingleStudent extends Component {
 }
 
 const mapStateToProps = (state)=> {
-    //console.log(state, ' single student state');
     return state
     
 }

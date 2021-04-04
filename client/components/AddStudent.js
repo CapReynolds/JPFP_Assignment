@@ -22,37 +22,29 @@ class AddStudent extends Component {
    render(){
        const {onInputChange, Create} = this;
        const {firstName, lastName, email, GPA} = this.state;
-    return  (
-        <div id='form'>
-                <br>
-                </br>
-                <label>
-                Student First Name:
-                
-                <input type='text' name= 'firstName' value={firstName} onChange={onInputChange}/>
-                </label>
-                
-                <label>
-                Student Last Name:
-                
-                <input type='text' name= 'lastName' value={lastName} onChange={onInputChange}/>
-                </label>
-                
-                <label>
-                Student Email:
-                
-                <input type='text' name= 'email' value={email} onChange={onInputChange}/>
-                </label>
-                <label>
-                Student GPA:
-                
-                <input type='text' name= 'GPA' value={GPA} onChange={onInputChange}/>
-                </label>
-                
-               
-                <button onClick={()=>Create(firstName,lastName, email, GPA)}>Add Student</button>
-        </div>
-    );
+        return  (
+            <div id='form'>
+                <div id='form_row'>
+                    <label>Student First Name:</label>
+                    <input type='text' name= 'firstName' value={firstName} onChange={onInputChange}/>
+                </div>
+                <div id='form_row'>
+                    <label>Student Last Name:</label>
+                    <input type='text' name= 'lastName' value={lastName} onChange={onInputChange}/>
+                </div>
+                <div id='form_row'>
+                    <label>Student Email Address:</label>
+                    <input type='text' name= 'email' value={email} onChange={onInputChange}/>
+                </div>
+                <div id='form_row'>
+                    <label>Student GPA:</label>
+                    <input type='text' name= 'GPA' value={GPA} onChange={onInputChange}/>
+                </div>
+                <div id='form_row'>
+                    <button onClick={()=>Create(firstName,lastName, email, GPA)}>Add Student</button>
+                </div>
+            </div>
+        );
     }
 }
 

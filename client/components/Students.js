@@ -1,13 +1,11 @@
 import React, {Component} from "react"
-//import store from '../store/store';
-import store from '../store/index';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 import {DeleteAStudent} from '../store/students';
 
 const Students = (props) => {
     const {students, DeleteStudent} = props;
-    //console.log(students);
+    
     return  (
         <div>
             <div id='page_title'>
@@ -20,7 +18,7 @@ const Students = (props) => {
             </div>
             <div id = 'all_items'>
                 {
-                    students != undefined ?
+                    students != undefined && students.length != 0 ?
                     students.map(student =>{
                         return (
                             <div id='campus_info'>
@@ -38,15 +36,14 @@ const Students = (props) => {
                                             </Link>
                                             : <br></br>
                                         }
-                                        <div id='button_div'>
-                                            <button>edit</button>
-                                            <button onClick={()=> DeleteStudent(student.id)}>delete</button>
+                                        <div id='buttons_div'>
+                                            <button id='delete' onClick={()=> DeleteStudent(student.id)}>delete</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         );
-                    }) : <div><h1>nothing</h1></div>
+                    }) : <div><h1>There are no Students</h1></div>
                 } 
             </div>
         </div>

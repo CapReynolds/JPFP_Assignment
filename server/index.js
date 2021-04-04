@@ -43,6 +43,8 @@ app.get('/api/students', routes);
 app.get('/api/campuses/:id', routes);
 app.get('/api/students/:id', routes);
 
+app.post('/api/campuses/edit/', routes);
+app.post('/api/students/edit/', routes);
 app.post('/api/campuses', routes);
 app.post('/api/students', routes);
 
@@ -94,16 +96,17 @@ const syncAndSeed = async() => {
         }
 
         await Promise.all(
-            campusArr.map(campus => {[
+            campusArr.map(campus => 
                 Campus.create(campus),
-            ]})
+            )
         );
-            
+        
+        
         await Promise.all(
-            studentArr.map(student => {[
+            studentArr.map(student => 
                 Student.create(student),
-            ]})
-        );
+            )
+        ); 
         
     }
     catch(err){

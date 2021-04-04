@@ -3,6 +3,7 @@ import axios from 'axios';
 const LOAD_CAMPUSES = 'LOAD_CAMPUSES'; //action type
 const CREATE_CAMPUS = 'CREATE_CAMPUS'; //action type
 const DELETE_CAMPUS = 'DELETE_CAMPUS'; //action type
+const EDIT_CAMPUS = 'EDIT_CAMPUS'; //action type
 
 const initialState = [];
 
@@ -24,6 +25,13 @@ export const loadCampuses = (campuses) => {
     return {
       type: DELETE_CAMPUS,
       campusID
+    }
+  }
+
+  export const editCampus = (campus) => {
+    return {
+      type: EDIT_CAMPUS, 
+      campus
     }
   }
 
@@ -59,12 +67,27 @@ export const loadCampuses = (campuses) => {
   export const DeleteACampus = (campusID) =>{
     return async(dispatch) => {
       try{
-          const campus = (await axios.get(`/api/campuses/${campusID}`)).data;
-          console.log(campus);
           dispatch(deleteCampus(campusID));
           const removedcampus = (await axios.delete(`/api/campuses/${campusID}`)).data;
-          //dispatch(deleteCampus(campusID));
-          //history.push(`/campuses/${campus.id}`);
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+    }
+  }
+
+  export const EditACampus = (campusName, campusAddress, campusID, studentsArr) =>{
+    return async(dispatch) => {
+      try{
+        const campusInfo = {
+          id: campusID,
+          name: campusName,
+          address: campusAddress,
+          students: studentsArr
+        }
+          const campus = (await axios.post(`/api/campuses/edit/`, campusInfo)).data;
+          dispatch(editCampus(campus));
       }
       catch(err)
       {
@@ -81,7 +104,10 @@ export const loadCampuses = (campuses) => {
       state = [...state, action.campus]  
     }
     if (action.type === DELETE_CAMPUS) {
-      state = [...state.filter(campus => campus.id != action.campusID)]  
+      state = [...state.filter(campus => campus.id !== action.campusID)]  
+    }
+    if (action.type === EDIT_CAMPUS) { 
+      state = state.map(campus=> campus.id === action.campus.id ? action.campus : campus)
     }
     return state;
   }

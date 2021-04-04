@@ -10,7 +10,11 @@ body {
     height: 25px;
   }
   a:link{
+    text-decoration: none;
     color:rgb(248, 221, 139);
+  }
+  a:hover {
+    color: rgba(250, 168, 101, 0.918);
   }
   a:visited {
     color: rgb(245, 240, 235);
@@ -21,6 +25,18 @@ body {
   nav a.selected{
     font-weight: bold;
 }
+#welcome{
+    margin:auto;
+    margin-top: 3%;
+    display:flex;
+    justify-content: center;
+    background: rgb(70, 124, 168);
+    color: cornsilk;
+    width: 60%;
+    text-align: center;
+    border: 2px solid #f8f8f84f;
+}
+
 #page_title{
     display: flex;
     flex-direction: row;
@@ -37,7 +53,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     background-color: #ffffff;
-    border: 2px solid #7e77774f;
+    color:cornsilk;
 }
 
 .campus_info_a {
@@ -62,10 +78,11 @@ img {
     padding:5px;
 }
 #campus_info_single {
-    background: rgb(70, 124, 168);
+    background: whitesmoke;
     width: 80%;
     flex-direction: row;
     margin: 10px;
+    color:black;
 }
 #campus_info2 {
     background: rgb(70, 124, 168);
@@ -96,7 +113,13 @@ img {
     flex: 1;
 }
 #buttons_div{
+    display: flex;
     justify-content: flex-end;
+}
+.buttons_div2{
+    display:flex;
+    justify-content: flex-end;
+
 }
 #student-list{
     display:flex;
@@ -110,7 +133,7 @@ img {
     display: flex;
     width:100%;
     justify-content: space-between;
-    background-color: rgb(103, 172, 57);
+    background: rgba(70, 124, 168, 0.822);
 }
 
 #student_b > #button_div {
@@ -118,11 +141,58 @@ img {
     align-items:flex-end;
 }
 
+
 #student-info {
     display: flex;
-    background-color: rgb(241, 200, 62);
+    background-color:rgba(164, 204, 250, 0.651);
+}
+#student_info_single {
+    margin: 10px;
+    display: flex;
+    width: 40%;
+    background-color:whitesmoke;
+    color: black;
+}
+.student_info_a_single {
+    margin-top: 10px;
+    text-align: center;
+}
+.student_info_b_single > p, h2 {
+    text-align: center;
+}
+#student_container {
+    width:100%;
 }
 #form{
+    margin: auto;
+    background-color: whitesmoke;
+    list-style-type: none;
+    margin-top: 5%;
+    border-radius: 3px;
+    width: 50%;  
+}
+#form_row {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding: .5em;
+  }
+  #form_row > label {
+    padding: .5em 1em .5em 0;
+    flex: 1;
+  }
+  #form_row > input {
+    flex: 2;
+  }
+  #form_row > input,
+  #form_row > button {
+    padding: .5em;
+  }
+  button {
+      background-color: rgba(14, 101, 216, 0.637);
+      color:white;
+  }
+
+  #delete {
+    background-color: rgba(216, 14, 14, 0.637);
+    color:white;
 }
