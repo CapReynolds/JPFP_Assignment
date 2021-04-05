@@ -45,6 +45,7 @@ router.get('/api/campuses/:id', async (req, res, next) => {
     res.json(campus);
   }
   catch (error) {
+    res.status(500).send(JSON.stringify(error));
     next(error)
   }
 })
@@ -62,6 +63,7 @@ router.get('/api/students/:id', async (req, res, next) => {
     res.send(student);
   }
   catch (error) {
+    res.status(500).send(JSON.stringify(error));
     next(error)
   }
 })
@@ -76,6 +78,7 @@ router.post('/api/campuses', async (req, res, next) => {
     
   }
   catch (error) {
+    res.status(500).send(JSON.stringify(error));
     next(error)
   }
 })
@@ -92,6 +95,7 @@ router.post('/api/students', async (req, res, next) => {
     
   }
   catch (error) {
+    res.status(500).send(JSON.stringify(error));
     next(error)
   }
 })
@@ -176,6 +180,7 @@ router.post('/api/campuses/edit/', async (req, res, next) => {
     }
   }
   catch (err) {
+    res.status(500).send(JSON.stringify(err));
     next(err)
   }
 })
@@ -227,6 +232,7 @@ router.post('/api/students/edit/', async (req, res, next) => {
     }
   }
   catch (err) {
+    res.status(500).send(JSON.stringify(err));
     next(err)
   }
 })

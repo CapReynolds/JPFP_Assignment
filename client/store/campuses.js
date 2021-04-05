@@ -59,6 +59,19 @@ export const loadCampuses = (campuses) => {
       }
       catch(err)
       {
+        const errArr = err.response.data.errors;
+        let tmp = errArr.map(error => error.message);
+        let tmp2 = [];
+        tmp.forEach(message=>
+        {
+          if (message.includes('name', 'null')){
+              tmp2.push('Please enter a valid Campus name. \n');
+          }
+          if (message.includes('address', 'null')){
+              tmp2.push('Please enter a valid Address. \n');
+          }
+        });
+        window.alert(tmp2.join(''));
         console.log(err);
       }
     }
@@ -91,7 +104,20 @@ export const loadCampuses = (campuses) => {
       }
       catch(err)
       {
-        console.log(err);
+        console.dir(err);
+        const errArr = err.response.data.errors;
+        let tmp = errArr.map(error => error.message);
+        let tmp2 = [];
+        tmp.forEach(message=>
+        {
+          if (message.includes('name', 'null')){
+              tmp2.push('Please enter a valid campus name. \n');
+          }
+          if (message.includes('address', 'null')){
+              tmp2.push('Please enter a valid address. \n');
+          }
+        });
+        window.alert(tmp2.join(''));
       }
     }
   }

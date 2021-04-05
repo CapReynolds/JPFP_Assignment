@@ -29,11 +29,11 @@ class AddCampus extends Component {
             <div id='form'>
                 <div id='form_row'>
                     <label>Campus Name:</label>
-                    <input type='text' name= 'name' value={name} onChange={onInputChange}/>
+                    <input type='text' name= 'name' value={name} onChange={onInputChange}required/>
                 </div>
                 <div id='form_row'>
                     <label>Campus Address:</label>
-                    <input type='text' name= 'address' value={address} onChange={onInputChange} />
+                    <input type='text' name= 'address' value={address} onChange={onInputChange}required />
                 </div>
                 
                 <div id='form_row'>

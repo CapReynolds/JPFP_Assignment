@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const LOAD_STUDENTS = 'LOAD_STUDENTS'; 
 const CREATE_STUDENT = 'CREATE_STUDENT'; 
 const DELETE_STUDENT = 'DELETE_STUDENT'; 
@@ -56,12 +57,32 @@ export const loadStudents = (students) => {
             GPA
           }
           const student = (await axios.post('/api/students', newStudent)).data;
+          student.validate();
+          
           dispatch(createStudent(student));
           history.push(`/students/${student.id}`);
       }
-      catch(err)
+      catch(err) 
       {
-        console.log(err);
+        const errArr = err.response.data.errors;
+        let tmp = errArr.map(error => error.message);
+        let tmp2 = [];
+        tmp.forEach(message=>
+        {
+          if (message.includes('firstName', 'null')){
+              tmp2.push('Please enter a valid first name. \n');
+          }
+          if (message.includes('lastName', 'null')){
+              tmp2.push('Please enter a valid last name. \n');
+          }
+          if (message.includes('email', 'null')){
+                tmp2.push('Please enter a valid email address. \n');
+          }
+          if (message.includes('GPA', 'null')){
+              tmp2.push('Please enter a valid grade point average. \n');
+          }
+        });
+        window.alert(tmp2.join(''));
       }
     }
   }
@@ -94,7 +115,26 @@ export const loadStudents = (students) => {
       }
       catch(err)
       {
-        console.log(err);
+        console.dir(err);
+        const errArr = err.response.data.errors;
+        let tmp = errArr.map(error => error.message);
+        let tmp2 = [];
+        tmp.forEach(message=>
+        {
+          if (message.includes('firstName', 'null')){
+              tmp2.push('Please enter a valid first name. \n');
+          }
+          if (message.includes('lastName', 'null')){
+              tmp2.push('Please enter a valid last name. \n');
+          }
+          if (message.includes('email', 'null')){
+                tmp2.push('Please enter a valid email address. \n');
+          }
+          if (message.includes('GPA', 'null')){
+              tmp2.push('Please enter a valid grade point average. \n');
+          }
+        });
+        window.alert(tmp2.join(''));
       }
     }
   }
@@ -102,7 +142,6 @@ export const loadStudents = (students) => {
   export const UnregisterAStudent = (student, campus) =>{
     return async(dispatch) => {
       try{
-        console.log('in the unregister student edit');
         const studentInfo = {
           campusID: campus.id,
           studentID: student.id
@@ -134,3 +173,4 @@ export const loadStudents = (students) => {
   }
 
 
+  

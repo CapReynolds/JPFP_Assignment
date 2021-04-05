@@ -36,10 +36,10 @@ class EditCampus extends Component {
     }
 
    onInputChange(event) {
-       const {students} = props;
+       const {students} = this.state;
+       console.log(students);
         this.setState({
             [event.target.name]: event.target.value,
-            students: students.length
         });
     }   
 
@@ -79,7 +79,8 @@ class EditCampus extends Component {
                     {campus.students !== null && campus.students !== undefined ? 
                         campus.students.map(student =>{
                             return (
-                                <div id = 'student-item' key={student.id}>       
+                                <div id = 'student-item' key={student.id}> 
+                                     
                                     <div id ='student-info'>
                                         <div id='student_a'><img src={student.imageURL}/></div>  
                                         <div id='student_b'>

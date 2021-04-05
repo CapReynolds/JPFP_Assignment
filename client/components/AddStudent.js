@@ -26,19 +26,19 @@ class AddStudent extends Component {
             <div id='form'>
                 <div id='form_row'>
                     <label>Student First Name:</label>
-                    <input type='text' name= 'firstName' value={firstName} onChange={onInputChange}/>
+                    <input type='text' name= 'firstName' value={firstName} onChange={onInputChange} required />
                 </div>
                 <div id='form_row'>
                     <label>Student Last Name:</label>
-                    <input type='text' name= 'lastName' value={lastName} onChange={onInputChange}/>
+                    <input type='text' name= 'lastName' value={lastName} onChange={onInputChange} required/>
                 </div>
                 <div id='form_row'>
                     <label>Student Email Address:</label>
-                    <input type='text' name= 'email' value={email} onChange={onInputChange}/>
+                    <input type='email' name= 'email' value={email} onChange={onInputChange} required/>
                 </div>
                 <div id='form_row'>
                     <label>Student GPA:</label>
-                    <input type='text' name= 'GPA' value={GPA} onChange={onInputChange}/>
+                    <input type='text' name= 'GPA' value={GPA} onChange={onInputChange}required/>
                 </div>
                 <div id='form_row'>
                     <button onClick={()=>Create(firstName,lastName, email, GPA)}>Add Student</button>
